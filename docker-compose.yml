@@ -1,14 +1,22 @@
 services:
   serge:
-    image: ghcr.io/serge-chat/serge:latest
+    image: ghcr.io/serge-chat/serge:0.7.0
     container_name: serge
     restart: unless-stopped
     ports:
       - 8008:8008
     volumes:
-      - weights:/usr/src/app/weights
-      - datadb:/data/db/
+      - serge_weights:/usr/src/app/weights
+      - serge_datadb:/data/db/
 
 volumes:
-  weights:
-  datadb:
+  serge_weights:
+    driver_opts:
+      type: nfs
+      device: ":/Docker/serge/weights"
+      o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
+  serge_datadb:
+    driver_opts:
+      type: nfs
+      device: ":/Docker/serge/datadb"
+      o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
