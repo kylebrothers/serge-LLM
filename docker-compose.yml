@@ -1,6 +1,6 @@
 services:
   serge:
-    image: ghcr.io/serge-chat/serge:0.7.0
+    image: ghcr.io/serge-chat/serge:main
     container_name: serge
     restart: unless-stopped
     ports:
